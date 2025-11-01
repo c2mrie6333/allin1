@@ -1,10 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Daily Dashboard</title>
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>All in 1</title>
   <link rel="manifest" href="manifest.json">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -12,31 +11,117 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="loader">
-    <div class="spinner"></div>
-    <p>Loading...</p>
+  <div id="app-shell">
+    <header class="topbar">
+      <div class="logo">All in 1</div>
+      <div class="header-actions">
+        <button id="quick-add" class="icon-btn">＋</button>
+      </div>
+    </header>
+
+    <main class="content">
+      <section id="home" class="page active">
+        <div class="panel greeting-panel">
+          <div class="greeting-left">
+            <div id="greeting" class="greeting-text">Good morning</div>
+            <div id="date" class="sub muted">—</div>
+          </div>
+          <div class="greeting-right">
+            <div id="clock" class="clock">00:00</div>
+          </div>
+        </div>
+
+        <div class="panel row-panels">
+          <div class="mini-panel" id="weather-panel">
+            <div class="mp-title">Weather</div>
+            <div id="weatherData" class="mp-value">—</div>
+          </div>
+          <div class="mini-panel" id="battery-panel">
+            <div class="mp-title">Battery</div>
+            <div id="battery" class="mp-value">—</div>
+          </div>
+        </div>
+
+        <div class="panel list-panel">
+          <div class="panel-title">Quick Reminders</div>
+          <div id="quick-list" class="list"></div>
+        </div>
+
+        <div class="panel list-panel">
+          <div class="panel-title">Quick Links</div>
+          <div class="links-grid">
+            <a class="link-card" href="https://youtube.com" target="_blank">YouTube</a>
+            <a class="link-card" href="https://discord.com" target="_blank">Discord</a>
+            <a class="link-card" href="https://mail.google.com" target="_blank">Gmail</a>
+            <a class="link-card" href="https://reddit.com" target="_blank">Reddit</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="reminders" class="page">
+        <div class="panel">
+          <div class="panel-title">Reminders</div>
+          <div class="reminder-input">
+            <input id="reminder-text" placeholder="Reminder text">
+            <input id="reminder-time" type="time">
+            <button id="add-reminder" class="btn">Add</button>
+          </div>
+          <div id="reminder-list" class="list"></div>
+        </div>
+      </section>
+
+      <section id="notes" class="page">
+        <div class="panel">
+          <div class="panel-title">Notes</div>
+          <div class="note-controls">
+            <input id="note-title" placeholder="Title">
+            <button id="add-note" class="btn">New</button>
+          </div>
+          <div id="notes-list" class="notes-grid"></div>
+          <div id="note-editor" class="editor hidden">
+            <input id="editor-title" placeholder="Title">
+            <textarea id="editor-body" rows="8" placeholder="Write your note..."></textarea>
+            <div class="editor-actions">
+              <button id="save-note" class="btn">Save</button>
+              <button id="close-editor" class="btn ghost">Close</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="settings" class="page">
+        <div class="panel">
+          <div class="panel-title">Settings</div>
+          <div class="setting-row">
+            <div>Accent</div>
+            <div class="accent-options">
+              <button class="accent-option active" data-color="#00ff66" style="background:#00ff66"></button>
+              <button class="accent-option" data-color="#00e5ff" style="background:#00e5ff"></button>
+              <button class="accent-option" data-color="#b388ff" style="background:#b388ff"></button>
+              <button class="accent-option" data-color="#ffb86b" style="background:#ffb86b"></button>
+            </div>
+          </div>
+          <div class="setting-row">
+            <div>Theme</div>
+            <div><button id="toggle-theme" class="btn ghost">AMOLED Dark</button></div>
+          </div>
+          <div class="setting-row">
+            <div>Data</div>
+            <div><button id="clear-data" class="btn ghost">Clear local data</button></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav">
+      <button class="tab-btn active" data-target="home">Home</button>
+      <button class="tab-btn" data-target="reminders">Reminders</button>
+      <button class="tab-btn" data-target="notes">Notes</button>
+      <button class="tab-btn" data-target="settings">Settings</button>
+    </nav>
   </div>
 
-  <main id="app" style="display:none;">
-    <section id="header">
-      <h2 id="greeting"></h2>
-      <p id="date"></p>
-      <h1 id="clock"></h1>
-    </section>
-
-    <section id="weather">
-      <p id="weatherData">Fetching weather...</p>
-    </section>
-
-    <section id="reminders">
-      <h3>Reminders</h3>
-      <div id="todo-list"></div>
-      <div id="todo-input">
-        <input type="text" id="new-task" placeholder="Add a reminder...">
-        <button id="add-task">+</button>
-      </div>
-    </section>
-  </main>
+  <div id="toast" class="toast hidden"></div>
 
   <script src="app.js"></script>
 </body>
