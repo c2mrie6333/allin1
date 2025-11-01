@@ -1,8 +1,9 @@
 {
-  "name": "My Web App",
-  "short_name": "MyApp",
+  "name": "My Mobile App",
+  "short_name": "MobileApp",
   "start_url": ".",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#000000",
   "theme_color": "#000000",
   "icons": [
