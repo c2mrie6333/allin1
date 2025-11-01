@@ -3,20 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>My Mobile App</title>
+  <title>Daily Dashboard</title>
 
   <link rel="manifest" href="manifest.json">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="apple-touch-icon" href="icon.png">
   <link rel="stylesheet" href="style.css">
-
-  <script>
-    if (!/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-      document.write('<style>body{display:none;}</style>');
-      alert("This app is mobile only.");
-    }
-  </script>
 </head>
 <body>
   <div id="loader">
@@ -24,21 +17,27 @@
     <p>Loading...</p>
   </div>
 
-  <div id="app" style="display:none;">
-    <h1>Welcome to My Web App</h1>
-    <p>This app is optimized for mobile.</p>
-  </div>
+  <main id="app" style="display:none;">
+    <section id="header">
+      <h2 id="greeting"></h2>
+      <p id="date"></p>
+      <h1 id="clock"></h1>
+    </section>
 
-  <script>
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        document.getElementById('loader').style.opacity = '0';
-        setTimeout(() => {
-          document.getElementById('loader').style.display = 'none';
-          document.getElementById('app').style.display = 'block';
-        }, 500);
-      }, 1500);
-    });
-  </script>
+    <section id="weather">
+      <p id="weatherData">Fetching weather...</p>
+    </section>
+
+    <section id="reminders">
+      <h3>Reminders</h3>
+      <div id="todo-list"></div>
+      <div id="todo-input">
+        <input type="text" id="new-task" placeholder="Add a reminder...">
+        <button id="add-task">+</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
 </body>
 </html>
